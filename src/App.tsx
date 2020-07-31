@@ -1,14 +1,15 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 import styled from "styled-components";
+
+import GNav from './components/Nav';
 
 const Wrapper = styled.div`
   border: 1px solid red;
@@ -21,12 +22,6 @@ const Main = styled.main`
   flex-grow: 1;
   overflow-y: auto;
 `
-const Nav = styled.nav`
-  > ul {
-    display: flex;
-    justify-content: space-around;
-  }
-`
 
 function App() {
   return (
@@ -34,7 +29,7 @@ function App() {
         <Wrapper>
           <Main>
             <Switch>
-              <Redirect exact from="/" to="/account" />
+              <Redirect exact from="/" to="/account"/>
               <Route path="/tags">
                 <Tags/>
               </Route>
@@ -45,23 +40,11 @@ function App() {
                 <Statistics/>
               </Route>
               <Route path="*">
-                <NoMatch />
+                <NoMatch/>
               </Route>
             </Switch>
           </Main>
-          <Nav>
-            <ul>
-              <li>
-                <Link to="/tags">标签页</Link>
-              </li>
-              <li>
-                <Link to="/account">记账页</Link>
-              </li>
-              <li>
-                <Link to="/statistics">统计页</Link>
-              </li>
-            </ul>
-          </Nav>
+          <GNav />
         </Wrapper>
       </Router>
   );
