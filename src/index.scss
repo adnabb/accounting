@@ -7,6 +7,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
+  color: $black;
 }
 
 body,div,p {
@@ -25,4 +26,9 @@ a {
 .icon {
   width: 30px;
   height: 30px;
+}
+
+.nav-selected {
+  color: $yellow;
+  font-weight: bold;
 }

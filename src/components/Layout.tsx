@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   flex-direction: column;
 `
 const Main = styled.main`
-  border: 1px solid green;
   flex-grow: 1;
   overflow-y: auto;
 `

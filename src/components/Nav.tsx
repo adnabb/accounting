@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import React from 'react';
 import Icon from './icon'
+import '../helper.sass';
 
 const Nav = styled.nav`
+  //TODO：怎么使用变量？ 
+  //border-top: 1px solid $gray;
+  border-top: 1px solid rgba(0, 0, 0, .25);
   > ul {
     display: flex;
     justify-content: space-around;
@@ -15,9 +19,23 @@ const Nav = styled.nav`
       flex-direction: column;
       justify-content: center;
       text-align: center;
+      position: relative;
       
       svg {
         margin: 0 auto 4px auto;
+      }
+      
+      &.nav-selected {
+        > svg {
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top: -13px;
+          background: white;
+        }
+        > span {
+          margin-top: 32px
+        }
       }
     }
   }
@@ -28,18 +46,22 @@ function GNav() {
       <Nav>
         <ul>
           <li>
-            <Link to="/tags">
-              <Icon name="tag"></Icon>标签页</Link>
+            <NavLink to="/tags" activeClassName="nav-selected">
+              <Icon name="tag"></Icon>
+              <span>标签页</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="/account">
+            <NavLink to="/account" activeClassName="nav-selected">
               <Icon name="account"></Icon>
-              记账页</Link>
+              <span>记账页</span>
+            </NavLink>
           </li>
           <li>
-            <Link to="/statistics">
+            <NavLink to="/statistics" activeClassName="nav-selected">
               <Icon name="statistic"></Icon>
-              统计页</Link>
+              <span>统计页</span>
+            </NavLink>
           </li>
         </ul>
       </Nav>
