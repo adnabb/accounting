@@ -31,7 +31,7 @@ const Nav = styled.nav`
           height: 40px;
           position: absolute;
           top: -13px;
-          background: white;
+          background: $background-color;
         }
         > span {
           margin-top: 32px

@@ -8,10 +8,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   color: $black;
+  background-color: $background-color;
 }
 
 body,div,p {
   box-sizing: border-box;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -32,3 +38,14 @@ a {
   color: $yellow;
   font-weight: bold;
 }
+
+:focus {
+  outline: none;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
