@@ -21,18 +21,8 @@ export default function Account() {
       <MyLayout>
         <Layout>
           <TagSection />
-          <NoteSection>
-            <label>
-              <span>备注</span>
-              <input type="text" placeholder="请在这里添加备注"/>
-            </label>
-          </NoteSection>
-          <CategorySection>
-            <ol>
-              <li className="selected">支出</li>
-              <li>收入</li>
-            </ol>
-          </CategorySection>
+          <NoteSection />
+          <CategorySection />
           <KeyoardSection>
             <div className="result">100</div>
             <div className="button-wrapper clearfix">
