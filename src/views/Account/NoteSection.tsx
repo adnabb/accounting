@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import React, {RefObject, useState} from 'react';
+import React, {useState} from 'react';
 
 const Wrapper = styled.section`
   font-size: 14px;
   > label {
     padding: 26px 16px;
-    display: inline-block;
+    display: flex;
     width: 100%;
     box-sizing: border-box;
     > input {

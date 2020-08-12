@@ -35,7 +35,7 @@ const CategorySection: React.FC = () => {
     <Wrapper>
       <ol>
         {categoryList.map(c => (
-            <li className={c === category ? 'selected' : ''} onClick={() => setCategory(c)}>
+            <li className={c === category ? 'selected' : ''} key={c} onClick={() => setCategory(c)}>
               {categoryMap[c]}
             </li>
         ))}
