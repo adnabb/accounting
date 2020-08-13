@@ -35,9 +35,13 @@ const Wrapper = styled.section`
   }
 `;
 
-export function TagSection() {
+type Props = {
+  value: string[]
+  onChange: (tags:string[]) => void
+}
+const TagSection:React.FC<Props> = (props) => {
   const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
-  const [selected, setSelected] = useState<string[]>([]);
+  const selected = props.value;
   const addTag = () => {
     const newTag = window.prompt('请输入您期待添加的标签');
     if (!newTag || tags.indexOf(newTag) >= 0) return;
@@ -47,11 +51,10 @@ export function TagSection() {
     ]);
   }
   const getTagClass = (tag:string) => {
-    console.log(tag, selected.indexOf(tag) >= 0 ? 'selected' : '')
     return selected.indexOf(tag) >= 0 ? 'selected' : ''
   }
   const triggerTag = (tag:string) => {
-    setSelected(selected.indexOf(tag) >= 0 ? selected.filter(currentTag => currentTag !== tag) : [...selected, tag])
+    props.onChange(selected.indexOf(tag) >= 0 ? selected.filter(currentTag => currentTag !== tag) : [...selected, tag])
   }
   return (
     <Wrapper>
@@ -62,3 +65,5 @@ export function TagSection() {
     </Wrapper>
   )
 }
+
+export { TagSection }

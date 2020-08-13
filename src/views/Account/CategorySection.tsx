@@ -26,16 +26,20 @@ const Wrapper = styled.section`
     }
   }
 `;
+type Category = 'expenditure' | 'income'
 
-const CategorySection: React.FC = () => {
-  const [category, setCategory] = useState('expenditure');
+type Props = {
+  value: Category
+  onChange: (category:Category) => void
+}
+const CategorySection: React.FC<Props> = (props) => {
   const [categoryList] = useState<('expenditure' | 'income')[]>(['expenditure', 'income']);
   const categoryMap = {'expenditure': '支出', 'income': '收入'};
   return (
     <Wrapper>
       <ol>
         {categoryList.map(c => (
-            <li className={c === category ? 'selected' : ''} key={c} onClick={() => setCategory(c)}>
+            <li className={c === props.value ? 'selected' : ''} key={c} onClick={() => props.onChange(c)}>
               {categoryMap[c]}
             </li>
         ))}

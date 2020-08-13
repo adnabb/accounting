@@ -55,8 +55,13 @@ const Wrapper = styled.section`
   }
 `;
 
-const KeyoardSection: React.FC = () => {
-  const [result, setResult] = useState('0');
+type Props = {
+  value: number
+  onChange: (value:number) => void
+}
+const KeyoardSection: React.FC<Props> = (props) => {
+  const amount = props.value.toString()
+  const [result, setResult] = useState(amount)
   const onClick = (e:React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     switch (text) {
@@ -79,7 +84,7 @@ const KeyoardSection: React.FC = () => {
         setResult(result.length > 1 ? result.slice(0,-1) : '0')
         break
       case '清空':
-        setResult('0');
+        setResult('0')
         break;
       case 'ok':
         console.log('ok');
@@ -87,6 +92,9 @@ const KeyoardSection: React.FC = () => {
       default:
         break;
     }
+  }
+  const ok = () => {
+    props.onChange(parseFloat(result))
   }
   return (
     <Wrapper>
@@ -103,7 +111,7 @@ const KeyoardSection: React.FC = () => {
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button className="ok">OK</button>
+        <button className="ok" onClick={ok}>OK</button>
         <button className="zero">0</button>
         <button className="dot">.</button>
       </div>
