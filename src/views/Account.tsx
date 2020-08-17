@@ -23,6 +23,12 @@ export default function Account() {
     category: 'expenditure' as Category,
     amount: 0,
   })
+  const onChange = (obj:Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    })
+  }
 
   return (
       <MyLayout>
@@ -31,30 +37,10 @@ export default function Account() {
         {selected.category} <br/>
         {selected.amount} <br/>
         <Layout>
-          <TagSection value={selected.tags} onChange={(tags) => {
-            setSelected({
-              ...selected,
-              tags,
-            })
-          }}/>
-          <NoteSection value={selected.note} onChange={(note) => {
-            setSelected({
-              ...selected,
-              note,
-            })
-          }} />
-          <CategorySection value={selected.category} onChange={(category) => {
-            setSelected({
-              ...selected,
-              category,
-            })
-          }} />
-          <KeyoardSection value={selected.amount} onChange={(amount) => {
-            setSelected({
-              ...selected,
-              amount,
-            })
-          }} />
+          <TagSection value={selected.tags} onChange={(tags) => onChange({tags})}/>
+          <NoteSection value={selected.note} onChange={(note) => onChange(({note}))} />
+          <CategorySection value={selected.category} onChange={(category) => {onChange({category})}} />
+          <KeyoardSection value={selected.amount} onChange={(amount) => {onChange(({amount}))}} />
         </Layout>
       </MyLayout>
   )
