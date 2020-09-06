@@ -18,7 +18,7 @@ const MyLayout = styled.div`
 type Category = 'expenditure' | 'income'
 export default function Account() {
   const [selected, setSelected] = useState({
-    tags: [] as string[],
+    tagIds: [] as number[],
     note: '',
     category: 'expenditure' as Category,
     amount: 0,
@@ -33,7 +33,7 @@ export default function Account() {
   return (
       <MyLayout>
         <Layout>
-          <TagSection value={selected.tags} onChange={(tags) => onChange({tags})}/>
+          <TagSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds})}/>
           <NoteSection value={selected.note} onChange={(note) => onChange(({note}))} />
           <CategorySection value={selected.category} onChange={(category) => {onChange({category})}} />
           <KeyoardSection value={selected.amount} onChange={(amount) => {onChange(({amount}))}} />

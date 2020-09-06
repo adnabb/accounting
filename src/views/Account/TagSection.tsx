@@ -37,30 +37,37 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  value: string[]
-  onChange: (tags:string[]) => void
+  value: number[]
+  onChange: (tags:number[]) => void
 }
 const TagSection:React.FC<Props> = (props) => {
   const {tags, setTags} = useTags();
-  const selected = props.value;
+  const selectedIds = props.value;
+  const findTag = (newTag: string) => {
+    let found = false;
+    tags.forEach((tag) => {
+      if (tag.name === newTag) found = true;
+    });
+    return found;
+  }
   const addTag = () => {
     const newTag = window.prompt('请输入您期待添加的标签');
-    if (!newTag || tags.indexOf(newTag) >= 0) return;
+    if (!newTag || findTag(newTag)) return;
     setTags([
       ...tags,
-      newTag,
+      { id: Math.random(), name: newTag},
     ]);
   }
-  const getTagClass = (tag:string) => {
-    return selected.indexOf(tag) >= 0 ? 'selected' : ''
+  const getTagClass = (id:number) => {
+    return selectedIds.indexOf(id) >= 0 ? 'selected' : ''
   }
-  const triggerTag = (tag:string) => {
-    props.onChange(selected.indexOf(tag) >= 0 ? selected.filter(currentTag => currentTag !== tag) : [...selected, tag])
+  const triggerTag = (id:number) => {
+    props.onChange(selectedIds.indexOf(id) >= 0 ? selectedIds.filter(currentTag => currentTag !== id) : [...selectedIds, id])
   }
   return (
     <Wrapper>
       <ol>
-        {tags.map(tag => <li key={tag} className={getTagClass(tag)} onClick={() => triggerTag(tag)}>{tag}</li>)}
+        {tags.map(tag => <li key={tag.id} className={getTagClass(tag.id)} onClick={() => triggerTag(tag.id)}>{tag.name}</li>)}
       </ol>
       <button onClick={addTag}>新增标签</button>
     </Wrapper>

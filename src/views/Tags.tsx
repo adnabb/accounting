@@ -38,26 +38,18 @@ const ButtonWrapper = styled.div`
 
 export default function Tags() {
   const {tags, setTags} = useTags();
-  const addTag = () => {
-    const newTag = window.prompt('请输入您期待添加的标签');
-    if (!newTag || tags.indexOf(newTag) >= 0) return;
-    setTags([
-      ...tags,
-      newTag,
-    ]);
-  }
   return (
       <Layout>
         <TagWrapper>
           {tags.map((tag, index) => <li key={index}>
-            <Link to={'/tags/' + tag}>
-              <span className="tag">{tag}</span>
+            <Link to={'/tags/' + tag.id}>
+              <span className="tag">{tag.name}</span>
               <span>></span>
             </Link>
           </li>)}
         </TagWrapper>
         <ButtonWrapper>
-          <button onClick={addTag}>新建标签</button>
+          <button>新建标签</button>
         </ButtonWrapper>
       </Layout>
   )
