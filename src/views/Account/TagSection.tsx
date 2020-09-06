@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import {useTags} from 'useTags';
+import {createTagId} from 'lib/createTagId'
 
 const Wrapper = styled.section`
   padding: 0 16px;
@@ -55,7 +56,7 @@ const TagSection:React.FC<Props> = (props) => {
     if (!newTag || findTag(newTag)) return;
     setTags([
       ...tags,
-      { id: Math.random(), name: newTag},
+      { id: createTagId(), name: newTag},
     ]);
   }
   const getTagClass = (id:number) => {
