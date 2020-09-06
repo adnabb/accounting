@@ -7,6 +7,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import {Tag} from './views/tag';
 import Tags from './views/Tags';
 import Account from './views/Account';
 import Statistics from './views/Statistics';
@@ -17,6 +18,9 @@ function App() {
       <Router>
         <Switch>
           <Redirect exact from="/" to="/account"/>
+          <Route path="/tags/:tag">
+              <Tag/>
+          </Route>
           <Route path="/tags">
             <Tags/>
           </Route>

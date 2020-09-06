@@ -13,6 +13,7 @@ const Nav = styled.nav`
     justify-content: space-around;
     margin: 2px;
     padding: 0;
+    background: #fff;
     
     > li > a {
       display: flex;

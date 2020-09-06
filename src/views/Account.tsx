@@ -32,10 +32,6 @@ export default function Account() {
 
   return (
       <MyLayout>
-        {selected.tags} <br/>
-        {selected.note} <br/>
-        {selected.category} <br/>
-        {selected.amount} <br/>
         <Layout>
           <TagSection value={selected.tags} onChange={(tags) => onChange({tags})}/>
           <NoteSection value={selected.note} onChange={(note) => onChange(({note}))} />

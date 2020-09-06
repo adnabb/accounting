@@ -11,8 +11,13 @@ body {
   background-color: $background-color;
 }
 
-body,div,p {
+body,div,p,ol, ul {
   box-sizing: border-box;
+}
+
+button {
+  outline: none;
+  border: none;
 }
 
 ol, ul {
