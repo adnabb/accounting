@@ -42,18 +42,11 @@ type Props = {
   onChange: (tags:number[]) => void
 }
 const TagSection:React.FC<Props> = (props) => {
-  const {tags, setTags} = useTags();
+  const {tags, setTags, findTagByName} = useTags();
   const selectedIds = props.value;
-  const findTag = (newTag: string) => {
-    let found = false;
-    tags.forEach((tag) => {
-      if (tag.name === newTag) found = true;
-    });
-    return found;
-  }
   const addTag = () => {
     const newTag = window.prompt('请输入您期待添加的标签');
-    if (!newTag || findTag(newTag)) return;
+    if (!newTag || findTagByName(newTag)) return;
     setTags([
       ...tags,
       { id: createTagId(), name: newTag},

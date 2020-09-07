@@ -37,7 +37,7 @@ const ButtonWrapper = styled.div`
 `
 
 export default function Tags() {
-  const {tags, setTags} = useTags();
+  const {tags} = useTags();
   return (
       <Layout>
         <TagWrapper>

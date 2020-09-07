@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Switch>
           <Redirect exact from="/" to="/account"/>
-          <Route path="/tags/:tag">
+          <Route path="/tags/:id">
               <Tag/>
           </Route>
           <Route path="/tags">
