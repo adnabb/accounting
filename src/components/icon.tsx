@@ -3,6 +3,8 @@ import React from 'react';
 require('../icons/tag.svg');
 require('../icons/account.svg');
 require('../icons/statistic.svg');
+require('../icons/arrow-left.svg');
+require('../icons/arrow-right.svg');
 
 function importAll(require: __WebpackModuleApi.RequireContext) {
   require.keys().forEach(require);
@@ -21,7 +23,7 @@ type Props = {
 function Icon(props: Props) {
   return (
       <svg className="icon">
-        <use xlinkHref={`#${props.name}`}/>
+        {props.name && <use xlinkHref={`#${props.name}`}/>}
       </svg>
   )
 }
