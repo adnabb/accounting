@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, ReactEventHandler} from 'react';
+import React, {ChangeEventHandler} from 'react';
 import {useTags} from 'useTags';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
