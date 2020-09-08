@@ -32,7 +32,7 @@ const ButtonWrapper = styled.div`
 `
 
 export default function Tags() {
-  const {tags} = useTags();
+  const {tags, addTag} = useTags();
   return (
       <Layout>
         <TagWrapper>
@@ -44,7 +44,7 @@ export default function Tags() {
           </li>)}
         </TagWrapper>
         <ButtonWrapper>
-          <Button>新建标签</Button>
+          <Button onClick={addTag}>新建标签</Button>
         </ButtonWrapper>
       </Layout>
   )

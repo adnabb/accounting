@@ -21,14 +21,13 @@ const InputWrapper = styled.div`
     background: #fff;
   }
 `
-
 const ButtonWrapper = styled.div`
   text-align: center;
   margin-top: 44px;
 `
 
 const Tag:React.FC = (props) => {
-  const {findTagById, updateTagName} = useTags()
+  const {findTagById, updateTagName, deleteTag} = useTags()
   const {id:stringId} = useParams();
   const id = parseInt(stringId)
   const tag = findTagById(id);
@@ -42,12 +41,16 @@ const Tag:React.FC = (props) => {
           <span>编辑标签</span>
           <Icon className="arrow" name=''></Icon>
         </TopBar>
-        <InputWrapper>
-          <Input label="标签名" placeholder="请输入标签名" value={tag.name} onChange={onChange} />
-        </InputWrapper>
-        <ButtonWrapper>
-          <Button>删除标签</Button>
-        </ButtonWrapper>
+        {tag ? (
+            <div>
+              <InputWrapper>
+                <Input label="标签名" placeholder="请输入标签名" value={tag.name} onChange={onChange} />
+              </InputWrapper>
+              <ButtonWrapper>
+                <Button onClick={() => deleteTag(id)}>删除标签</Button>
+              </ButtonWrapper>
+            </div>
+        ) : <div className="no-tag">标签不存在</div>}
       </Layout>
   )
 }

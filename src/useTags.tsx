@@ -27,6 +27,22 @@ export const useTags = () => {
     }
     return index;
   }
+  const addTag = () => {
+    const newTag = window.prompt('请输入您期待添加的标签');
+    if (!newTag || findTagByName(newTag)) return;
+    setTags([
+      ...tags,
+      { id: createTagId(), name: newTag},
+    ]);
+  }
+  const deleteTag = (id:number) => {
+    const index = findTagIndex(id);
+    if(index >= 0) {
+      const copy = JSON.parse(JSON.stringify(tags));
+      copy.splice(index, 1);
+      setTags(copy);
+    }
+  }
   const updateTagName = (id:number, name:string) => {
     const copy = JSON.parse(JSON.stringify(tags));
     const index = findTagIndex(id);
@@ -35,5 +51,5 @@ export const useTags = () => {
       setTags(copy);
     }
   }
-  return {tags, setTags, findTagByName, findTagById, updateTagName};
+  return {tags, setTags, findTagByName, findTagById, updateTagName, addTag, deleteTag};
 }
