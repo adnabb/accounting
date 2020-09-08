@@ -37,6 +37,11 @@ a {
 .icon {
   width: 30px;
   height: 30px;
+
+  &.arrow {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .nav-selected {

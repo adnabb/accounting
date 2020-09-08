@@ -18,11 +18,12 @@ try {
 
 type Props = {
   name: string
+  className?: string
 }
 
 function Icon(props: Props) {
   return (
-      <svg className="icon">
+      <svg className={'icon ' + props.className}>
         {props.name && <use xlinkHref={`#${props.name}`}/>}
       </svg>
   )

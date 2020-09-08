@@ -1,29 +1,53 @@
-import React from 'react';
+import React, {ChangeEventHandler, ReactEventHandler} from 'react';
 import {useTags} from 'useTags';
 import { useParams } from 'react-router-dom';
-import Layout from 'components/Layout';
-import Icon from 'components/icon';
 import styled from 'styled-components';
+import Layout from 'components/Layout';
+import Icon from 'components/Icon';
+import {Input} from 'components/Input';
+import {Button} from 'components/Button';
 
 const TopBar = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 9px;
+  padding: 15px;
   background: #fff;
+`
+const InputWrapper = styled.div`
+  background: #fff;
+  margin-top: 8px;
+  input {
+    background: #fff;
+  }
+`
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+  margin-top: 44px;
 `
 
 const Tag:React.FC = (props) => {
-  const {findTagById} = useTags()
-  const {id} = useParams();
-  const tag = findTagById(parseInt(id));
+  const {findTagById, updateTagName} = useTags()
+  const {id:stringId} = useParams();
+  const id = parseInt(stringId)
+  const tag = findTagById(id);
+  const onChange:ChangeEventHandler<HTMLInputElement> = (e) => {
+    updateTagName(id, e.target.value)
+  }
   return (
       <Layout>
         <TopBar>
-          <Icon name='arrow-left'></Icon>
+          <Icon className="arrow" name='arrow-left'></Icon>
           <span>编辑标签</span>
-          <Icon name=''></Icon>
+          <Icon className="arrow" name=''></Icon>
         </TopBar>
+        <InputWrapper>
+          <Input label="标签名" placeholder="请输入标签名" value={tag.name} onChange={onChange} />
+        </InputWrapper>
+        <ButtonWrapper>
+          <Button>删除标签</Button>
+        </ButtonWrapper>
       </Layout>
   )
 }

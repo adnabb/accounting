@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useTags} from 'useTags';
-import Layout from '../components/Layout';
 import {Link} from 'react-router-dom';
+import Layout from 'components/Layout';
+import Icon from 'components/Icon';
+import {Button} from 'components/Button';
 
 const TagWrapper = styled.ol`
   font-size: 16px;
@@ -26,14 +28,7 @@ const TagWrapper = styled.ol`
 
 const ButtonWrapper = styled.div`
   text-align: center;
-  button {
-    font-size: 16px;
-    padding: 9px 16px;
-    color: #FFFFFF;
-    background: #767676;
-    border-radius: 4px;
-    margin-top: 44px;
-  }
+  margin-top: 44px;
 `
 
 export default function Tags() {
@@ -44,12 +39,12 @@ export default function Tags() {
           {tags.map((tag, index) => <li key={index}>
             <Link to={'/tags/' + tag.id}>
               <span className="tag">{tag.name}</span>
-              <span>></span>
+              <Icon className="arrow" name="arrow-right"/>
             </Link>
           </li>)}
         </TagWrapper>
         <ButtonWrapper>
-          <button>新建标签</button>
+          <Button>新建标签</Button>
         </ButtonWrapper>
       </Layout>
   )

@@ -29,7 +29,6 @@ export default function Account() {
       ...obj
     })
   }
-
   return (
       <MyLayout>
         <Layout>
