@@ -33,11 +33,18 @@ const Tag:React.FC = (props) => {
   const tag = findTagById(id);
   const onChange:ChangeEventHandler<HTMLInputElement> = (e) => {
     updateTagName(id, e.target.value)
+  };
+  const onDeleteTag = () => {
+    deleteTag(id);
+    goBack();
+  }
+  const goBack = () => {
+    window.history.back();
   }
   return (
       <Layout>
         <TopBar>
-          <Icon className="arrow" name='arrow-left'></Icon>
+          <Icon className="arrow" name='arrow-left' onClick={goBack}></Icon>
           <span>编辑标签</span>
           <Icon className="arrow" name=''></Icon>
         </TopBar>
@@ -47,7 +54,7 @@ const Tag:React.FC = (props) => {
                 <Input label="标签名" placeholder="请输入标签名" value={tag.name} onChange={onChange} />
               </InputWrapper>
               <ButtonWrapper>
-                <Button onClick={() => deleteTag(id)}>删除标签</Button>
+                <Button onClick={onDeleteTag}>删除标签</Button>
               </ButtonWrapper>
             </div>
         ) : <div className="no-tag">标签不存在</div>}

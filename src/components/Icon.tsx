@@ -19,12 +19,13 @@ try {
 type Props = {
   name: string
   className?: string
-}
+} & React.SVGAttributes<HTMLOrSVGElement>
 
 function Icon(props: Props) {
+  const {className, name, ...rest} = props;
   return (
-      <svg className={'icon ' + props.className}>
-        {props.name && <use xlinkHref={`#${props.name}`}/>}
+      <svg className={'icon ' + className} {...rest}>
+        {name && <use xlinkHref={`#${name}`}/>}
       </svg>
   )
 }
