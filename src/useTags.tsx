@@ -1,5 +1,7 @@
-import {useState} from 'react';
 import {createTagId} from 'lib/createTagId'
+import {useUpdate} from 'hooks/useUpdate';
+import {useEffect, useState} from 'react';
+import {Tag} from './views/tag';
 
 type Tag = {
   id: number
@@ -9,7 +11,16 @@ type Tag = {
 const initialData = [{ id: createTagId(), name: '衣' }, { id: createTagId(), name: '食'}, { id: createTagId(), name: '住'}, { id: createTagId(), name: '行'}];
 
 export const useTags = () => {
-  const [tags, setTags] = useState<Array<Tag>>(initialData);
+  const [tags, setTags] = useState<Array<Tag>>([])
+  useEffect(() => {
+    const localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
+    setTags(localTags.length ? localTags : initialData);
+  }, []);
+
+  useUpdate(() => {
+    window.localStorage.setItem('tags', JSON.stringify(tags))
+  }, [tags])
+
   const findTagByName = (name: string) => {
     const found = tags.filter((tag) => tag.name === name);
     return found && found[0];
