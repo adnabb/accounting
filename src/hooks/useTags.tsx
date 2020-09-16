@@ -1,7 +1,7 @@
 import {createTagId} from 'lib/createTagId'
 import {useUpdate} from 'hooks/useUpdate';
 import {useEffect, useState} from 'react';
-import {Tag} from './views/tag';
+import {Tag} from '../views/tag';
 
 type Tag = {
   id: number

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const Wrapper = styled.section`
   font-family: Consolas;
@@ -58,43 +58,37 @@ const Wrapper = styled.section`
 type Props = {
   value: number
   onChange: (value:number) => void
+  onOk: () => void
 }
 const KeyoardSection: React.FC<Props> = (props) => {
   const amount = props.value.toString()
   const [result, setResult] = useState(amount)
+  useEffect(() => {
+    setResult(amount)
+  }, [amount])
+  useEffect(() => {
+    props.onChange(parseFloat(result))
+  }, [result])
   const onClick = (e:React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     switch (text) {
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      case '0':
-        setResult(result === '0' ? text : result + text)
+      case '1':case '2':case '3':case '4':case '5':case '6':case '7':case '8':case '9':case '0':
+        setResult(result === '0' ? text : result + text);
         break;
       case '.':
-        setResult(result.indexOf('.') >= 0 ? result : result + text)
+        setResult(result.indexOf('.') >= 0 ? result : result + text);
         break
       case '删除':
-        setResult(result.length > 1 ? result.slice(0,-1) : '0')
+        setResult(result.length > 1 ? result.slice(0,-1) : '0');
         break
       case '清空':
-        setResult('0')
+        setResult('0');
         break;
-      case 'ok':
-        console.log('ok');
+      case 'OK':
+        props.onOk()
         break;
-      default:
-        break;
+      default: break;
     }
-  }
-  const ok = () => {
-    props.onChange(parseFloat(result))
   }
   return (
     <Wrapper>
@@ -111,7 +105,7 @@ const KeyoardSection: React.FC<Props> = (props) => {
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button className="ok" onClick={ok}>OK</button>
+        <button className="ok">OK</button>
         <button className="zero">0</button>
         <button className="dot">.</button>
       </div>
