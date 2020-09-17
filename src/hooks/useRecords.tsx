@@ -1,14 +1,8 @@
 import {useEffect, useState} from 'react';
-import {useUpdate} from './useUpdate';
+import dayjs from 'dayjs';
+import {Record, GroupedRecord} from 'types'
 
-type Category = 'expenditure' | 'income'
-type Record = {
-  tagIds:  number[],
-  note: string,
-  category: Category,
-  amount: number,
-  createTime?: number,
-}
+import {useUpdate} from './useUpdate';
 
 export const useRecords = () => {
   const [records, setRecords] = useState<Array<Record>>([]);
@@ -18,11 +12,19 @@ export const useRecords = () => {
   const addRecord = (record: Record) => {
     setRecords([...records, record])
   }
-  useEffect(() => {
-   getRecord();
-  }, [])
+  const getRecordsGroupByCreateTime = (recordList: Array<Record> = records) => {
+    const recordsByTime: GroupedRecord = {};
+    for (let i = 0; i < recordList.length; i += 1) {
+      const record = recordList[i];
+      const key = dayjs(record.createTime).format('YYYY年MM月DD日');
+      if (!recordsByTime[key]) {recordsByTime[key] = []}
+      recordsByTime[key].push(record)
+    }
+    return recordsByTime;
+  }
+  useEffect(() => {getRecord();}, [])
   useUpdate(() => {
     window.localStorage.setItem('records', JSON.stringify(records));
   }, [records])
-  return {addRecord}
+  return {records, getRecordsGroupByCreateTime, addRecord}
 }

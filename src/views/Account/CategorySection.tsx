@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { Category } from 'types';
 import React, {useState} from 'react';
 
 const Wrapper = styled.section`
   font-size: 24px;
   > ol {
     display: flex;
-    background: rgba(248, 208, 45, .3);
+    background: white;
     text-align: center;
     > li {
       width: 50%;
@@ -26,7 +27,6 @@ const Wrapper = styled.section`
     }
   }
 `;
-type Category = 'expenditure' | 'income'
 
 type Props = {
   value: Category

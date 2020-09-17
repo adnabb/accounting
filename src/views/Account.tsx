@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Category, Record} from 'types'
 import {useRecords} from 'hooks/useRecords';
 import Layout from '../components/Layout';
 import styled from 'styled-components';
@@ -15,16 +16,13 @@ const MyLayout = styled.div`
     }  
   }
 `;
+const CategoryWrapper = styled.div`
+  ol {
+    background: rgba(248, 208, 45, .3);
+  }
+`
 
-type Category = 'expenditure' | 'income'
-type Record = {
-  tagIds:  number[],
-  note: string,
-  category: Category,
-  amount: number,
-  createTime?: number,
-}
-const initialSelected: Record = {tagIds: [], note: '', category: 'expenditure', amount: 0 };
+const initialSelected: Record = {tagIds: [], note: '', category: 'expenditure', amount: 0, createTime: new Date().getTime() };
 export default function Account() {
   const [selected, setSelected] = useState<Record>(initialSelected)
   const onChange = (obj:Partial<typeof selected>) => {
@@ -49,7 +47,9 @@ export default function Account() {
         <Layout>
           <TagSection value={selected.tagIds} onChange={(tagIds) => onChange({tagIds})}/>
           <NoteSection value={selected.note} onChange={(note) => onChange(({note}))} />
-          <CategorySection value={selected.category} onChange={(category) => {onChange({category})}} />
+          <CategoryWrapper>
+            <CategorySection value={selected.category} onChange={(category) => {onChange({category})}} />
+          </CategoryWrapper>
           <KeyoardSection value={selected.amount} onChange={(amount) => {onChange(({amount}))}} onOk={onOk} />
         </Layout>
       </MyLayout>
